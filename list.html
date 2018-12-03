@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script>
+        function loadError() {
+            document.getElementById("resourceFail").classList.remove("d-none");
+        };
+
+        window.onerror = function () {
+            document.getElementById("pageError").classList.remove("d-none");
+        }
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous" onerror="loadError()">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous" onerror="loadError()">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" onerror="loadError()">
+    <link rel="stylesheet" href="styles.css" onerror="loadError()">
+    <link rel="stylesheet" href="axa-styles.css" onerror="loadError()">
+    <title>PPP Portal</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light">
+        <a class="navbar-brand" href="#">
+            <img src="img/AXA_Logo30.png" width="30" height="30" alt="AXA Logo" />
+            <span class="axa-blue align-bottom d-md-none d-lg-inline">&nbsp;PPP Healthcare</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link axa-blue deep-sapphire-hover" href="index.html">
+                        <i class="fas fa-home"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link axa-blue deep-sapphire-hover" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link axa-blue deep-sapphire-hover" href="#">Support</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link axa-blue deep-sapphire-hover" href="#">Members</a>
+                </li>
+            </ul>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 axa-blue axa-blue-border axa-blue-background-hover" type="submit">
+                    <i class="fas fa-search"></i> Search</button>
+            </form>
+        </div>
+    </nav>
+    <noscript>
+        <div class="alert alert-danger mt-2" role="alert">
+            Javascript is disabled. Please enable Javascript to be able to use this site.
+            <a href="https://www.enable-javascript.com/" target="_blank" class="alert-link">Click here</a> for instructions.
+        </div>
+    </noscript>
+    <div class="alert alert-danger mt-2 d-none" role="alert" id="resourceFail">
+        <span>An error occurred fetching a required resource. This site will not work as expected.</span>
+    </div>
+    <div class="alert alert-danger mt-2 d-none" role="alert" id="pageError">
+        <span>An unexpected error occurred. This site may not work as expected.</span>
+    </div>
+    <div class="alert alert-danger mt-2 d-none" role="alert" id="searchParameterError">
+        <span>Search parameters not found or invalid. Search failed.</span>
+    </div>
+
+    <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="bookModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookModalLabel">Book Appointment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Would you like to book the appointment <span id="modelAppointmentTime"></span>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" class="btn axa-blue-background" data-dismiss="modal">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="loader mt-5"></div>
+    <div class="container-fluid contentMaxWidth" id="profile-list">
+        <div class="row mt-4">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 verticalCenter">
+                        <span class="filterHeader">Filter</span>
+                        <div class="d-inline-block ml-3">
+                            <div class="btn-group-toggle d-inline-block mr-2">
+                                <label class="btn axa-grey-button" v-bind:class="{active: filter.gender.male}">
+                                    <input type="checkbox" autocomplete="off" id="male" v-model="filter.gender.male">
+                                    <i class="fas fa-mars"></i> Male
+                                </label>
+                            </div>
+                            <div class="btn-group-toggle d-inline-block">
+                                <label class="btn axa-grey-button" v-bind:class="{active: filter.gender.female}">
+                                    <input type="checkbox" autocomplete="off" id="female" v-model="filter.gender.female">
+                                    <i class="fas fa-venus"></i> Female
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4" id="profileList" style="display:none;">
+            <div class="col-xl-8 col-lg-9 col-md-12">
+                <template v-for="(profile, index) in filteredProfiles">
+                    <div class="boxShadow mb-4" v-bind:class="[profile.isPreferred ? ['preferredEntry', 'axa-blue-background'] : ['entry', 'axa-red-background']]"
+                        v-bind:key="profile.name">
+                        <div class="row justify-content-center">
+                            <div class="col-1 pr-0 centerTextAlign">
+                                <span class="number">{{index+1}}</span>
+                            </div>
+                            <div class="col-md-3 col-sm-2 d-sm-block d-none pr-0">
+                                <img alt="Profile image" class="img-fluid d-none d-sm-block" v-bind:src="'img/' + profile.image" />
+                            </div>
+                            <div class="col-md-4 col-sm-9 col-11 pr-0">
+                                <div class="name">
+                                    <a v-bind:href="'./profile.html?symptom=' + symptom + '&amp;speciality=' + speciality.name + '&amp;profileName=' + profile.name">{{profile.name }}</a>
+                                </div>
+                                <div class="axa-mercury">
+                                    <span>
+                                        <i class="fas fa-map-marker-alt"></i> {{profile.distance}}
+                                    </span>
+                                </div>
+                                <p>{{profile.description}}</p>
+                            </div>
+                            <div class="col-md-4 col-sm-10 col-12 mt-md-0 mt-2">
+                                <table v-if="profile.availability !== undefined" class="bookingTable" v-bind:class="[profile.isPreferred ? 'axa-dark-indigo-button-table' : 'axa-flamingo-button-table']">
+                                    <tr>
+                                        <th>Today</th>
+                                        <th>Tomorrow</th>
+                                        <th>Thursday</th>
+                                    </tr>
+                                    <tr v-for="row in availabilityPivot(profile.availability, ['Today', 'Tomorrow', 'Thursday'])">
+                                        <td v-for="(cell, index) in row" v-bind:class="{available : cell !== undefined}">
+                                            <a href="#" data-toggle="modal" data-target="#bookModal" v-bind:data-day="index" v-bind:data-time="cell" v-if="cell !== undefined">
+                                                <span>{{ cell }}</span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div v-if="profile.availability === undefined" class="centerTextAlign">
+                                    <a href="#" class="moreInfoButton" v-bind:class="profile.isPreferred ? 'axa-dark-indigo-background' : 'axa-flamingo-background'">More information</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                <div v-if="filteredProfiles.length === 0">
+                    There are no results for your criteria.
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-3">
+                <!-- Map -->
+                <img v-if="speciality.mapImage !== undefined" v-bind:src="'img/' + speciality.mapImage" class="img-fluid d-none d-lg-block sticky-top map"
+                />
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" onerror="loadError()"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js " integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 "
+        crossorigin="anonymous " onerror="loadError()"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js " integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T "
+        crossorigin="anonymous " onerror="loadError()"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" onerror="loadError()"></script>
+    <script type="text/javascript" src="./code.json" onerror="loadError()"></script>
+    <script type="text/javascript" src="./portal-search-data.json" onerror="loadError()"></script>
+    <script type="text/javascript" src="./list.json" onerror="loadError()"></script>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+body {
+    font-family: 'Source Sans Pro';
+}
+
+.axa-blue {
+    color: #00008f !important;
+}
+
+.axa-blue-border {
+    border-color: #00008f !important;
+}
+
+.axa-blue-background {
+    background-color: #00008f !important;
+    color: white !important;
+}
+
+.axa-blue-background-hover:hover {
+    background-color: #00008f !important;
+    color: white !important;
+}
+
+.deep-sapphire {
+    color: #00005b !important;
+}
+
+.deep-sapphire-hover:hover {
+    color: #00005b !important;
+}
+
+.header-underline {
+    border-bottom: #ec4d33 3px solid;
+}
+
+.axa-blue-button, .axa-grey-button.active {
+    background-color: #00008f;
+    color: white;
+    border-bottom: 1px solid #00005b;
+}
+
+.axa-dark-indigo-background, .axa-dark-indigo-button-table td a {
+    background-color: #3b3fd8;
+    color: white;
+}
+
+.axa-grey-button {
+    background-color: #7f7f7f;
+    color: white;
+    border-bottom: 1px solid #5f5f5f;
+}
+
+.axa-grey-button.focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.axa-flamingo-background, .axa-flamingo-button-table td a {
+    background-color: #ec4d33;
+    color: white;
+}
+
+.axa-burnt-sienna-background, .axa-burnt-sienna-button-table td a {
+    background-color: #f07662;
+    color: white;
+}
+
+.axa-mercury {
+    color: #e5e5e5;
+}
+
+.axa-mercury :hover {
+    color: #e5e5e5;
+}
+
+.axa-red-background, .axa-red-button-table td a {
+    background-color: #ff1721;
+    color: white;
+}
+
+.axa-alabaster-background {
+    background-color: #fafafa;
+    color: black;
+}
+
+.axa-pacific {
+    color: #00adc6;
+}
+
+.axa-acid {
+    color: #f0ff93;
+}

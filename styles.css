@@ -1,0 +1,207 @@
+.largeLabels label {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+body>nav {
+    box-shadow: 0 8px 8px 0 #e2e2e2;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.boxShadow {
+    padding: 10px;
+    box-shadow: 0 10px 30px 0 #7f7f7f;
+}
+
+.preferredEntry .number {
+    font-size: 24pt;
+    font-weight: 500;
+}
+
+.entry .number {
+    font-size: 24pt;
+}
+
+.preferredEntry .name a {
+    font-size: 24pt;
+    font-weight: 500;
+}
+
+.entry .name a {
+    font-size: 24pt;
+}
+
+.name a {
+    color: #f5f5f5;
+    line-height: 1.1em;
+}
+
+.bookingTable {
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout : fixed;
+    width: 100%;
+}
+
+.bookingTable a {
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    height: 22px;
+}
+
+.bookingTable a:hover {
+    color: white;
+}
+
+.centerTextAlign, .bookingTable th, .bookingTable td {
+    text-align: center;
+}
+
+.bookingTable a span {
+    position: relative;
+    top: -1px;
+    font-size: 1.1em;
+}
+
+.map {
+    top: 15px;
+}
+
+.filterHeader {
+    font-size: 24pt;
+    line-height: 1em;
+}
+
+.verticalCenter {
+    display: flex;
+    align-content: center;
+}
+
+.title {
+    font-size: 1.75em;
+}
+
+.profileName {
+    font-size: 36pt;
+    font-weight: 500;
+}
+
+.largerFont {
+    font-size: 1.25em;
+}
+
+.subtitle {
+    font-size: 18pt;
+}
+
+.dottedUnderline {
+    border-bottom: 1px dotted;
+}
+
+.moreInfoButton {
+    display: inline-block;
+    padding: 10px;
+}
+
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #00008f;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear 30;
+    margin: auto;
+    left: 0;
+    right: 0;
+    position: absolute;
+  }
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+/* sm */
+@media (min-width: 576px) {
+    .preferredEntry .number {
+        font-size: 36pt;
+    }
+
+    .preferredEntry .name a {
+        font-size: 24pt;
+    }
+
+    .entry .number {
+        font-size: 28pt;
+    }
+
+    .entry .name a {
+        font-size: 24pt;
+    }
+}
+/* md */
+@media (min-width: 768px) {
+    .preferredEntry .number {
+        font-size: 48pt;
+    }
+
+    .preferredEntry .name a {
+        font-size: 32pt;
+    }
+
+    .entry .number {
+        font-size: 36pt;
+    }
+
+    .entry .name a {
+        font-size: 28pt;
+    }
+}
+
+/* lg */
+@media (min-width: 992px) {
+    .preferredEntry .number {
+        font-size: 64pt;
+    }
+
+    .preferredEntry .name a {
+        font-size: 34pt;
+    }
+
+    .entry .number {
+        font-size: 46pt;
+    }
+
+    .entry .name a {
+        font-size: 30pt;
+    }
+}
+
+/* xl */
+@media (min-width: 1200px) {
+    .preferredEntry .number {
+        font-size: 78pt;
+    }
+
+    .preferredEntry .name a {
+        font-size: 36pt;
+    }
+
+    .entry .number {
+        font-size: 54pt;
+    }
+
+    .entry .name a {
+        font-size: 32pt;
+    }
+}
+
+@media (min-width: 1550px) {
+    .contentMaxWidth {
+        width: 1550px;
+    }
+}

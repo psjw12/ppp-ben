@@ -1,0 +1,188 @@
+'use strict';
+
+var portalSearchData = {
+    symptom: '',
+    symptoms: [
+        {
+            name: "Depression",
+            specialities: [
+                { name: "Stronger Minds", profiles: [] },
+                {
+                    name: "Psychiatrist",
+                    profiles: [{
+                        name: "Daisy Smith",
+                        isPreferred: true,
+                        image: "daisy.jpg",
+                        gender: "female",
+                        distance: "1.5 miles",
+                        description: "Psychiatrist with 8 years experience.",
+                        availability: [
+                            { day: "Today", times: ["13:30"] },
+                            { day: "Tomorrow", times: ["09:00", "11:00"] },
+                            { day: "Thursday", times: ["15:00"] },
+                            { day: "Friday", times: ["08:30", "14:30"] },
+                            { day: "Saturday", times: [] }
+                        ],
+                        phoneNumber: "0208 000 0000",
+                        email: "daisy@health.com",
+                        locationImage: "daisymap.jpg",
+                        proceduresAndSpecialInterests: ["Adult ADHD", "PTSD - Military", "OCD"],
+                        languages: ["English", "French"],
+                        educations: ["Royal College of Psychiatry"],
+                        facilities: ["Priory Tunbridge Wells", "London Clinic"],
+                        gmcNo: "4063418",
+                        ratings: [
+                            {
+                                name: "Julia Burton",
+                                date: "11/07/2018",
+                                stars: 5,
+                                review: "Really kind and understanding. Put me on the correct course of action"
+                            },
+                            {
+                                name: "Rose Garden",
+                                date: "09/07/2018",
+                                stars: 5,
+                                review: "Got an appointment really fast. Clean surgery."
+                            }
+                        ]
+                    },
+                    {
+                        name: "Robert Noland",
+                        isPreferred: false,
+                        image: "robert.jpg",
+                        gender: "male",
+                        distance: "0.5 miles",
+                        description: "Psychiatrist and Psychologist with 6 years studying",
+                        availability: [
+                            { day: "Today", times: [] },
+                            { day: "Tomorrow", times: [] },
+                            { day: "Thursday", times: ["16:30"] }
+                        ]
+                    },
+                    {
+                        name: "Louisa Loveheart",
+                        isPreferred: false,
+                        image: "louisa.jpg",
+                        gender: "female",
+                        distance: "3 miles",
+                        description: "Psychiatrist with 2 years professional experience",
+                        availability: [
+                            { day: "Today", times: ["18:45"] },
+                            { day: "Tomorrow", times: ["10:00", "11:15"] },
+                            { day: "Thursday", times: ["08:45", "09:30", "14:30"] }
+                        ]
+                    }],
+                    mapImage: "map.jpg"
+                },
+                {
+                    name: "Psychologist", profiles: []
+                }
+            ]
+        },
+        {
+            name: "Breast lump",
+            specialities: [
+                {
+                    name: "Direct Connect Breast",
+                    profiles: [
+                        {
+                            name: "Direct Connect Breast - Tunbridge Wells",
+                            isPreferred: true,
+                            image: "dcb.jpg",
+                            gender: "",
+                            distance: "0.5 miles",
+                            description: "Breast pathway",
+                            availability: [
+                                { day: "Today", times: ["9:00", "11:00", "13:30"] },
+                                { day: "Tomorrow", times: ["15:00"] },
+                                { day: "Thursday", times: [] }
+                            ]
+                        },
+                        {
+                            name: "Direct Connect Breast - Tonbridge",
+                            isPreferred: false,
+                            image: "dcb.jpg",
+                            gender: "",
+                            distance: "4 miles",
+                            description: "Breast pathway",
+                            availability: [
+                                { day: "Today", times: [] },
+                                { day: "Tomorrow", times: [] },
+                                { day: "Thursday", times: ["16:30"] }
+                            ]
+                        },
+                        {
+                            name: "Direct Connect Breast - Eastbourne",
+                            isPreferred: false,
+                            image: "dcb.jpg",
+                            gender: "",
+                            distance: "25 miles",
+                            description: "Breast pathway"
+                        }
+                    ],
+                    mapImage: "tunbridgemap.jpg"
+                },
+                { name: "General Surgeon", profiles: [] },
+                { name: "Breast Surgeon", profiles: [] }
+            ]
+        }
+    ],
+    postcodes: [
+        "SE1 8TG",
+        "NG19 7RL",
+        "CM6 3DB",
+        "SS15 4DA",
+        "IG1 4LD",
+        "G21 3SL",
+        "SN14 8LR",
+        "LU5 6AX",
+        "LE15 7UH",
+        "LU3 9EL",
+        "NP4 5BL",
+        "CT3 1FN",
+        "SN3 1UQ",
+        "SY16 1QT",
+        "FK10 2EP",
+        "KT23 3DE",
+        "SG15 6UB",
+        "SY3 9AZ",
+        "YO42 2RX",
+        "EN8 8NE",
+        "EH12 5LA",
+        "BN13 2BH",
+        "RM14 1HY",
+        "DL10 6LS",
+        "BT80 9NT",
+        "PE24 5TQ",
+        "BT26 6QX",
+        "B29 4DP",
+        "NN8 6BN",
+        "WA5 7NT",
+        "IP9 1AN",
+        "N12 8BE",
+        "NG31 7AE",
+        "EN5 2YW",
+        "S75 5NE",
+        "NW2 3BB",
+        "BS15 9TA",
+        "BD17 6QB",
+        "WC1B 5JP",
+        "CR7 8SF",
+        "CV1 4GY",
+        "NN7 2ZR",
+        "SG1 5QR",
+        "UB5 6LJ",
+        "L26 9TB",
+        "CW5 6JG",
+        "NW10 4SA",
+        "OL10 9AY",
+        "WA3 3PX",
+        "SL1 5UL",
+        "CT16 3PA",
+        "KT11 1HY"
+    ],
+    products: [
+        "Mandatory Pathway",
+        "Non Mandatory Pathway"
+    ]
+}

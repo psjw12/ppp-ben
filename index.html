@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script>
+        function loadError() {
+            document.getElementById("resourceFail").classList.remove("d-none");
+        };
+
+        window.onerror = function () {
+            document.getElementById("pageError").classList.remove("d-none");
+        }
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous" onerror="loadError()">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous" onerror="loadError()">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" onerror="loadError()">
+    <link rel="stylesheet" href="styles.css" onerror="loadError()">
+    <link rel="stylesheet" href="axa-styles.css" onerror="loadError()">
+    <title>PPP Portal</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light">
+        <a class="navbar-brand" href="#">
+            <img src="img/AXA_Logo30.png" width="30" height="30" alt="AXA Logo" />
+            <span class="axa-blue align-bottom d-md-none d-lg-inline">&nbsp;PPP Healthcare</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link deep-sapphire header-underline" href="#">
+                        <i class="fas fa-home"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link axa-blue deep-sapphire-hover" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link axa-blue deep-sapphire-hover" href="#">Support</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link axa-blue deep-sapphire-hover" href="#">Members</a>
+                </li>
+            </ul>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 axa-blue axa-blue-border axa-blue-background-hover" type="submit">
+                    <i class="fas fa-search"></i> Search</button>
+            </form>
+        </div>
+    </nav>
+    <noscript>
+        <div class="alert alert-danger mt-2" role="alert">
+            Javascript is disabled. Please enable Javascript to be able to use this site.
+            <a href="https://www.enable-javascript.com/" target="_blank" class="alert-link">Click here</a> for instructions.
+        </div>
+    </noscript>
+    <div class="alert alert-danger mt-2 d-none" role="alert" id="resourceFail">
+        <span>An error occurred fetching a required resource. This site will not work as expected.</span>
+    </div>
+    <div class="alert alert-danger mt-2 d-none" role="alert" id="pageError">
+        <span>An unexpected error occurred. This site may not work as expected.</span>
+    </div>
+    <div class="loader mt-5"></div>
+    <div class="container-fluid contentMaxWidth">
+        <form action="./list.html" class="largeLabels mt-4" id="portal-search" novalidate style="display:none;">
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label for="symptom">Symptom:</label>
+                        <select name="symptom" id="symptom" class="form-control form-control-lg" required v-model="symptom">
+                            <option value="" selected>Please select</option>
+                            <option v-for="option in symptoms" v-bind:value="option.name">{{ option.name }}</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Select a symptom
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label for="specialityInput">Speciality:</label>
+                        <select name="speciality" id="specialityInput" class="form-control form-control-lg" data-toggle="tooltip" data-placement="bottom"
+                            data-container="body" title="Select Symptom first for a list of Speciality" required>
+                            <option value="" selected>Please select</option>
+                            <option v-for="(option, index) in filteredSpeciality" v-bind:value="option.name" v-bind:key="option.name">{{ option.name }}</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Select a speciality
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label for="location">Postcode:</label>
+                        <input type="text" name="location" list="locations" id="location" class="form-control form-control-lg" required/>
+                        <datalist id="locations">
+                            <option v-for="postcode in postcodes" v-bind:value="postcode">{{ postcode }}</option>
+                        </datalist>
+                        <div class="invalid-feedback">
+                            Enter a postcode
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label for="product">Customer Product:</label>
+                        <select name="product" id="product" class="form-control form-control-lg" required>
+                            <option value="" selected>Please select</option>
+                            <option v-for="product in products" v-bind:value="product">{{ product }}</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            Select customers product
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <input type="submit" name="submit" value="Submit" class="buttonPad btn btn-lg axa-blue-border axa-blue-background" />
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" onerror="loadError()"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js " integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 "
+        crossorigin="anonymous " onerror="loadError()"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js " integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T "
+        crossorigin="anonymous " onerror="loadError()"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" onerror="loadError()"></script>
+    <script type="text/javascript" src="./code.json" onerror="loadError()"></script>
+    <script type="text/javascript" src="./portal-search-data.json" onerror="loadError()"></script>
+    <script type="text/javascript" src="./index.json" onerror="loadError()"></script>
+</body>
+
+</html>

@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script>
+        function loadError() {
+            document.getElementById("resourceFail").classList.remove("d-none");
+        };
+
+        window.onerror = function () {
+            document.getElementById("pageError").classList.remove("d-none");
+        }
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous" onerror="loadError()">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous" onerror="loadError()">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet" onerror="loadError()">
+    <link rel="stylesheet" href="styles.css" onerror="loadError()">
+    <link rel="stylesheet" href="axa-styles.css" onerror="loadError()">
+    <title>PPP Portal</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light">
+        <a class="navbar-brand" href="#">
+            <img src="img/AXA_Logo30.png" width="30" height="30" alt="AXA Logo" />
+            <span class="axa-blue align-bottom d-md-none d-lg-inline">&nbsp;PPP Healthcare</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link axa-blue deep-sapphire-hover" href="index.html">
+                        <i class="fas fa-home"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link axa-blue deep-sapphire-hover" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link axa-blue deep-sapphire-hover" href="#">Support</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link axa-blue deep-sapphire-hover" href="#">Members</a>
+                </li>
+            </ul>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 axa-blue axa-blue-border axa-blue-background-hover" type="submit">
+                    <i class="fas fa-search"></i> Search</button>
+            </form>
+        </div>
+    </nav>
+    <noscript>
+        <div class="alert alert-danger mt-2" role="alert">
+            Javascript is disabled. Please enable Javascript to be able to use this site.
+            <a href="https://www.enable-javascript.com/" target="_blank" class="alert-link">Click here</a> for instructions.
+        </div>
+    </noscript>
+    <div class="alert alert-danger mt-2 d-none" role="alert" id="resourceFail">
+        <span>An error occurred fetching a required resource. This site will not work as expected.</span>
+    </div>
+    <div class="alert alert-danger mt-2 d-none" role="alert" id="pageError">
+        <span>An unexpected error occurred. This site may not work as expected.</span>
+    </div>
+    <div class="alert alert-danger mt-2 d-none" role="alert" id="parameterError">
+        <span>Profile parameter was not found or is invalid. Can't load profile</span>
+    </div>
+    <div class="loader mt-5"></div>
+    <div class="container-fluid mt-4 contentMaxWidth" id="profile" style="display:none;">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="boxShadow mb-4" v-bind:class="[profile.isPreferred ? 'axa-blue-background' : 'axa-red-background']">
+                    <div class="content-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="profileName">
+                                    {{ profile.name }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class=" col-12 col-sm-4">
+                                <img v-bind:src="'img/' + profile.image" alt="Profile image" class="img-fluid" />
+                            </div>
+                            <div class="col-12 col-sm-8">
+                                <div>
+                                    <i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;{{profile.distance}}</div>
+                                <div class="axa-mercury">
+                                    <i class="fas fa-phone"></i>&nbsp;&nbsp;{{profile.phoneNumber}}</div>
+                                <div class="axa-mercury">
+                                    <i class="fas fa-at"></i>&nbsp;
+                                    <a v-bind:href="'mailto:' + profile.email" class="axa-mercury" />{{profile.email}}</a>
+                                </div>
+                                <div>{{profile.description}}</div>
+                                <div class="largerFont axa-acid">
+                                    <i v-if="profile.ratings !== undefined" v-for="n in 5" v-bind:class="[totalRating &lt; (n - 0.75) ? ['far', 'fa-star'] : totalRating &lt; (n - 0.25) ? ['fas', 'fa-star-half-alt'] : ['fas', 'fa-star']]"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="axa-flamingo-background boxShadow mb-4">
+                    <div class="title">
+                        <i class="far fa-calendar-alt"></i> Availability</div>
+                    <table class="bookingTable axa-burnt-sienna-button-table">
+                        <tr>
+                            <th>Today</th>
+                            <th>Tomorrow</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                        </tr>
+                        <tr v-for="row in availabilityPivot(profile.availability, ['Today', 'Tomorrow', 'Thursday', 'Friday', 'Saturday'])">
+                            <td v-for="cell in row" v-bind:class="{available : cell !== undefined}">
+                                <a href="#" v-if="cell !== undefined">
+                                    <span>{{ cell }}</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="boxShadow axa-burnt-sienna-background mb-4">
+                    <div class="title">
+                        <i class="fas fa-map-marker-alt"></i> Location</div>
+                    <img v-if="profile.locationImage !== undefined" v-bind:src="'img/' + profile.locationImage" alt="Profile location" class="img-fluid" />
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="boxShadow axa-flamingo-background mb-4">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <div class="title">
+                                    <i class="fas fa-user-md"></i> Procedures / Special Interests</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <ul>
+                                <li v-for="pas in profile.proceduresAndSpecialInterests">{{ pas }}</li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="subtitle">
+                                    <i class="fas fa-globe"></i> Language</div>
+                                <ul>
+                                    <li v-for="language in profile.languages">{{ language }}</li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <div class="subtitle">
+                                    <i class="fas fa-graduation-cap"></i> Education</div>
+                                <ul>
+                                    <li v-for="education in profile.educations">{{ education }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="subtitle">
+                                    <i class="fas fa-briefcase-medical"></i> Facilities</div>
+                                <ul>
+                                    <li v-for="facility in profile.facilities">{{ facility }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <span>GMC no
+                                    <span class="dottedUnderline">{{ profile.gmcNo }}</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="boxShadow axa-burnt-sienna-background mb-4">
+                    <div class="title">
+                        <i class="far fa-star"></i> Ratings</div>
+                    <div class="cards">
+                        <div class="card mb-2 axa-alabaster-background" v-for="rating in profile.ratings">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    {{ rating.name }}
+                                </h5>
+                                <h6 class="card-subtitle text-muted">{{ rating.date }}</h6>
+                                <div class="axa-pacific">
+                                    <i v-for="n in 5" v-bind:class="[rating.stars &lt; n ? 'far' : 'fas']" class="fa-star" ></i>
+                                </div>
+                                <p class="card-text">
+                                    {{ rating.review }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" onerror="loadError()"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js " integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49 "
+        crossorigin="anonymous " onerror="loadError()"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js " integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T "
+        crossorigin="anonymous " onerror="loadError()"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" onerror="loadError()"></script>
+    <script type="text/javascript" src="./code.json" onerror="loadError()"></script>
+    <script type="text/javascript" src="./portal-search-data.json" onerror="loadError()"></script>
+    <script type="text/javascript" src="./profile.json" onerror="loadError()"></script>
+</body>
+
+</html>
